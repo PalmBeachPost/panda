@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# PANDA Project server setup script for Ubuntu 12.04
+# PANDA Project server setup script for Ubuntu 16.04
 # Must be executed with sudo!
 
 set -x
@@ -8,7 +8,7 @@ exec 1> >(tee /var/log/panda-install.log) 2>&1
 
 echo "PANDA installation beginning."
 
-VERSION="1.1.2"
+VERSION="1.2.0"
 CONFIG_PATH="/opt/panda/setup_panda"
 
 # Setup environment variables
@@ -17,11 +17,21 @@ export DEPLOYMENT_TARGET="deployed"
 
 # Install outstanding updates
 apt-get --yes update
-apt-get --yes upgrade
+# 1604 change
+# apt-get --yes upgrade
+apt-get --yes dist-upgrade
 
 # Install required packages
-apt-get install --yes git openssh-server postgresql python2.7-dev libxml2-dev libxml2 libxslt1.1 libxslt1-dev nginx build-essential openjdk-6-jdk libpq-dev python-pip mercurial
+# 1604 change
+# added solor-common and Java 8, rather than Java 7 or 6.
+apt-get install --yes git openssh-server postgresql python2.7-dev libxml2-dev libxml2 libxslt1.1 libxslt1-dev nginx build-essential libpq-dev python-pip mercurial solr-common openjdk-8-jdk
 pip install uwsgi
+
+#1604 changes -- these are new
+pip install --upgrade pip
+apt-get --yes autoremove
+apt-get --yes clean
+
 
 # Make sure SSH comes up on reboot
 ln -s /etc/init.d/ssh /etc/rc2.d/S20ssh
@@ -29,16 +39,22 @@ ln -s /etc/init.d/ssh /etc/rc3.d/S20ssh
 ln -s /etc/init.d/ssh /etc/rc4.d/S20ssh
 ln -s /etc/init.d/ssh /etc/rc5.d/S20ssh
 
-# Setup Solr + Jetty
-wget -nv http://archive.apache.org/dist/lucene/solr/3.4.0/apache-solr-3.4.0.tgz -O /opt/apache-solr-3.4.0.tgz
-
-cd /opt
-tar -xzf apache-solr-3.4.0.tgz
-mv apache-solr-3.4.0 solr
-cp -r solr/example solr/panda
+# Disabled for 1604
+# # Setup Solr + Jetty
+# wget -nv http://archive.apache.org/dist/lucene/solr/3.4.0/apache-solr-3.4.0.tgz -O /opt/apache-solr-3.4.0.tgz
+# 
+# cd /opt
+# tar -xzf apache-solr-3.4.0.tgz
+# mv apache-solr-3.4.0 solr
+# cp -r solr/example solr/panda
 
 # Get PANDA code
-git clone https://github.com/pandaproject/panda.git panda
+# # # # # # # # # # # # # # # # ## # # git clone https://github.com/pandaproject/panda.git panda
+################## HEY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# Temporary 1604 change:
+cd /opt
+git clone https://github.com/PalmBeachPost/panda.git panda
+
 cd /opt/panda
 git checkout $VERSION
 
