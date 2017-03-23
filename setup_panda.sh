@@ -31,6 +31,8 @@ apt-get --yes dist-upgrade
 apt-get install --yes git openssh-server postgresql python2.7-dev libxml2-dev libxml2 libxslt1.1 libxslt1-dev nginx build-essential libpq-dev python-pip mercurial solr-common openjdk-8-jdk
 pip install uwsgi
 
+# HEY! Did we get dumped out of root here?
+
 #1604 changes -- these are new
 pip install --upgrade pip
 apt-get --yes autoremove
@@ -138,6 +140,8 @@ cp $CONFIG_PATH/solr.conf /etc/init/solr.conf
 # initctl reload-configuration
 
 # Re-enabled for 1604
+# HEY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Dies here. May need to reboot?
+
 initctl reload-configuration
 
 # Disabled to go back to upstart
@@ -160,7 +164,12 @@ rm /etc/nginx/sites-enabled/default
 service nginx restart
 
 # Setup Postgres
-cp $CONFIG_PATH/pg_hba.conf /etc/postgresql/9.1/main/pg_hba.conf
+# Disabled for 1604
+# cp $CONFIG_PATH/pg_hba.conf /etc/postgresql/9.1/main/pg_hba.conf
+
+# New for 1604
+cp $CONFIG_PATH/pg_hba.conf /etc/postgresql/9.5/main/pg_hba.conf
+
 service postgresql restart
 
 # Create database users
