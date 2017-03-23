@@ -11,6 +11,10 @@ echo "PANDA installation beginning."
 VERSION="1.2.0"
 CONFIG_PATH="/opt/panda/setup_panda"
 
+# Seems to help on command-line processing for 1604:
+export VERSION="1.2.0"
+export CONFIG_PATH="/opt/panda/setup_panda"
+
 # Setup environment variables
 echo "DEPLOYMENT_TARGET=\"deployed\"" >> /etc/environment
 export DEPLOYMENT_TARGET="deployed"
@@ -48,6 +52,11 @@ ln -s /etc/init.d/ssh /etc/rc5.d/S20ssh
 # mv apache-solr-3.4.0 solr
 # cp -r solr/example solr/panda
 
+# New for 1604:
+ln -s /usr/share/solr /opt/solr
+mkdir /opt/solr/panda
+
+
 # Get PANDA code
 # # # # # # # # # # # # # # # # ## # # git clone https://github.com/pandaproject/panda.git panda
 ################## HEY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -62,8 +71,12 @@ git checkout $VERSION
 cp $CONFIG_PATH/10periodic /etc/apt/apt.conf.d/10periodic
 service unattended-upgrades restart
 
+# New for 1604
+mkdir /opt/solr/panda/solr
+
 # Install Solr configuration
 cp $CONFIG_PATH/solr.xml /opt/solr/panda/solr/solr.xml
+
 
 mkdir /opt/solr/panda/solr/pandadata
 mkdir /opt/solr/panda/solr/pandadata/conf
@@ -102,7 +115,14 @@ touch /var/log/solr.log
 chown solr:solr /var/log/solr.log
 
 cp $CONFIG_PATH/solr.conf /etc/init/solr.conf
-initctl reload-configuration
+
+
+# Disabled for 1604. Upstart is not installed.
+# initctl reload-configuration
+
+# New for 1604
+systemctl daemon-reload
+
 service solr start
 
 # Setup uWSGI
