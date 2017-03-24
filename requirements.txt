@@ -9,7 +9,8 @@ fabric==1.2.6
 #
 # psycopg2==2.4.1
 # psycopg2==2.7.1 current version. And may be only available version
-psycopg2==2.4.3
+# psycopg2==2.4.3
+psycopg2==2.7.1
 #
 # celery==2.5.3
 #celery=4.0.2 is newest
