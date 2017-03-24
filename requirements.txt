@@ -72,7 +72,10 @@ xlrd==0.7.9
 django-keyedcache==1.5.1
 #
 # django-livesettings==1.4-14
-django-livesettings==1.4-16
+# Newest from that branch was
+# django-livesettings==1.4-16
+# but it's throwing errors
+django-livesettings==1.4-14
 #
 boto==2.0
 #
