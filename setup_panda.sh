@@ -28,7 +28,8 @@ apt-get --yes dist-upgrade
 # Install required packages
 # 1604 change
 # added solor-common and Java 8, rather than Java 7 or 6.
-apt-get install --yes git openssh-server postgresql python2.7-dev libxml2-dev libxml2 libxslt1.1 libxslt1-dev nginx build-essential libpq-dev python-pip mercurial solr-common openjdk-8-jdk
+# added wget and curl, which may already be present
+apt-get install --yes git openssh-server postgresql python2.7-dev libxml2-dev libxml2 libxslt1.1 libxslt1-dev nginx build-essential libpq-dev python-pip mercurial solr-common openjdk-8-jdk wget curl
 pip install uwsgi
 
 # HEY! Did we get dumped out of root here?
@@ -42,6 +43,8 @@ apt-get --yes clean
 #1604 changes -- let's drop systemd and stay with upstart for another four years
 apt-get --yes install upstart-sysv
 update-initramfs -u
+
+echo MANUALLY RESTART HERE NOW. PICK UP THE REST WHEN YOU GET BACK.
 
 
 ## IS THIS RIGHT WITH SYSTEMD??????????????????????????????????????????????????????????????????????????????????
