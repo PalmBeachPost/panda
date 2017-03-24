@@ -75,7 +75,10 @@ django-keyedcache==1.5.1
 # Newest from that branch was
 # django-livesettings==1.4-16
 # but it's throwing errors
-django-livesettings==1.4-14
+# django-livesettings==1.4-14 also errors out
+# git+https://bitbucket.org/bkroeze/django-livesettings.git@7127149ccf97#egg=django-livesettings
+# git+https://bitbucket.org/bkroeze/django-livesettings.git@7127149ccf972e138cb1b60f5f7a25c53c93c7ed#egg=django-livesettings
+hg+http://bitbucket.org/bkroeze/django-livesettings/#egg=django-livesettings
 #
 boto==2.0
 #
