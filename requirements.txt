@@ -1,3 +1,10 @@
+# # # Status as of 27 March:
+# django-longer-username may be busted
+# django-livesettings will not install; issue filed on Bitbucket
+#
+#
+#
+#
 # django==1.4.8
 # Django 1.11 is in release candidate mode as of 2017-03-23.
 # Without more development, we'd break stuff moving to a new major version.
@@ -61,7 +68,8 @@ requests==0.8.9
 # south==0.7.4
 south==0.7.6
 #
-git+https://github.com/GoodCloud/django-longer-username.git@e4e85d7d29b2#egg=longerusername
+# HEY! HEY!
+# git+https://github.com/GoodCloud/django-longer-username.git@e4e85d7d29b2#egg=longerusername
 #
 # openpyxl==2.2.0
 openpyxl==2.2.6
@@ -78,7 +86,8 @@ django-keyedcache==1.5.1
 # django-livesettings==1.4-14 also errors out
 # git+https://bitbucket.org/bkroeze/django-livesettings.git@7127149ccf97#egg=django-livesettings
 # git+https://bitbucket.org/bkroeze/django-livesettings.git@7127149ccf972e138cb1b60f5f7a25c53c93c7ed#egg=django-livesettings
-hg+http://bitbucket.org/bkroeze/django-livesettings/#egg=django-livesettings
+# HEY! HEY!
+# hg+http://bitbucket.org/bkroeze/django-livesettings/#egg=django-livesettings
 #
 boto==2.0
 #
